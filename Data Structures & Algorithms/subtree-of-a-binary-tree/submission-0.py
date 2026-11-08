@@ -1,0 +1,16 @@
+class Solution:
+    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        if root is None:
+            return False
+        if self.checker(root, subRoot):
+            return True
+        return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
+
+    def checker(self, root1, root2):
+        if root1 is None and root2 is None:
+            return True
+        if root1 is None or root2 is None:
+            return False
+        if root1.val != root2.val:
+            return False
+        return self.checker(root1.left, root2.left) and self.checker(root1.right, root2.right)
